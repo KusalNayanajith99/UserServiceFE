@@ -7,7 +7,6 @@ export const userService = {
       const processedData = {
         ...userData,
         age: parseInt(userData.age),
-        isCus: true
       };
       const response = await axiosInstance.post('/addUser', processedData);
       return response.data;
@@ -26,6 +25,15 @@ export const userService = {
       return response.data;
     } catch (error) {
       throw error.response ? error.response.data : new Error('Login failed');
+    }
+  },
+
+  fetchUserDetails: async (username) => {
+    try {
+      const response = await axiosInstance.post(`/getUser/${username}`);
+      return response.data;
+    } catch (error) {
+      throw error.response ? error.response.data : new Error('Failed to fetch user details!');
     }
   },
 
